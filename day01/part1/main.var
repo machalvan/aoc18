@@ -1,0 +1,10 @@
+var input_length 1
+
+whl input_length
+  inp input
+
+  var input_length 0
+  whl input[input_length]
+      inc input_length
+  end
+end
