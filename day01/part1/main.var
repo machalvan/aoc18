@@ -1,49 +1,78 @@
-inp input                           // Get input line and input line length
+inp input                         // Get input line and input line length
 var input_length 0
 whl input[input_length]
     inc input_length
 end
 
-whl input_length                    // Enter block if input length is more than 0
-  var index 0                       // Iterate over every character in input
-  whl input[index]
-    var char input[index]
-    var plus "+"
+var result 0
 
-    var char2 char                  // Copy char and plus
-    var plus_char_diff plus
+whl input_length                  // Enter block if input length is more than 0
+  var index 0
+  var char input[index]
+  var plus "+"
 
-    whl char2                       // Set copy of plus to be the difference between itself and char
-      dec char2                     // If the difference is 0, then the char is a plus sign
-      dec plus_char_diff
-    end
+  var char2 char                  // Copy char and plus
+  var plus_char_diff plus
 
-    var char_equals_plus 1          // Assume that plus_char_diff is 0 and therefor
-    var char_not_equals_plus 0      // char is a plus sign, change in next step if incorrect
-
-    whl plus_char_diff
-        var char_equals_plus 0
-        var char_not_equals_plus 1
-
-        var plus_char_diff 0
-    end
-
-    whl char_equals_plus
-      out "PLUS"
-      out 10
-
-      var char_equals_plus 0
-    end
-    whl char_not_equals_plus
-      out "MINUS"
-      out 10
-
-      var char_not_equals_plus 0
-    end
-
-    inc index
+  whl char2                       // Set copy of plus to be the difference between itself and char
+    dec char2                     // If the difference is 0, then the char is a plus sign
+    dec plus_char_diff
   end
 
+  var char_equals_plus 1          // Assume that char is a plus sign
+  var char_not_equals_plus 0      // and change in next step if incorrect
+
+  whl plus_char_diff
+      var char_equals_plus 0
+      var char_not_equals_plus 1
+
+      var plus_char_diff 0
+  end
+
+  var char_equals_plus2 char_equals_plus
+  var char_not_equals_plus2 char_not_equals_plus
+
+  whl char_equals_plus2            // If
+    out "PLUS"
+    out 10
+
+    var char_equals_plus2 0
+  end
+  whl char_not_equals_plus2        // Else
+    out "MINUS"
+    out 10
+
+    var char_not_equals_plus2 0
+  end
+
+  inc index
+  var char input[index]
+
+  whl char                        // Concatenate each char (integer) to a number variable
+    var index_minus_one index
+    dec index_minus_one
+
+    var number[index_minus_one] char
+
+    inc index
+    var char input[index]
+  end
+
+  int number
+
+  whl char_equals_plus            // If
+    inc result number
+    var char_equals_plus 0
+  end
+  whl char_not_equals_plus        // Else
+    dec result number
+    var char_not_equals_plus 0
+  end
+
+  str result
+  out result
+  out 10
+  int result
 
   inp input
   var input_length 0
