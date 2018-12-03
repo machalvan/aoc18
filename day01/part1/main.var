@@ -1,8 +1,48 @@
-var input_length 1
+inp input                   // Get input line and input line length
+var input_length 0
+whl input[input_length]
+    inc input_length
+end
 
-whl input_length
+whl input_length            // Enter block if input length is more than 0
+  var index 0               // Iterate over every character in input
+  whl input[index]
+    var plus "+"
+    var minus "-"
+    var char input[index]
+
+    out char
+    out 10
+
+    var char2 char          // Copy char, plus and minus
+    var plus_char_diff plus
+    var minus_char_diff minus
+
+    whl char2               // Set copy of plus and minus to be the difference between itself and char.
+      dec char2             // If the difference is 0, then the char is a plus/minus
+      dec plus_char_diff
+      dec minus_char_diff
+    end
+
+    //VAR equals_plus plus_char_diff          // Copy a so that we can play with it
+    VAR char_equals_plus 1                         // Assume that plus_char_diff is 0 and therefor
+                                              // equals_plus is true, change in next step if incorrect
+
+    WHL plus_char_diff
+        VAR char_equals_plus 0
+        VAR plus_char_diff 0
+    END
+
+    whl char_equals_plus
+      out "PLUS"
+      var char_equals_plus 0
+    end
+
+    inc index
+  end
+
+
   inp input
-
   var input_length 0
   whl input[input_length]
       inc input_length
