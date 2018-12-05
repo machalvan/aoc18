@@ -1,12 +1,8 @@
 var result 0                      // Initialize result to 0
 
 inp input                         // Get input line and its length
-var input_length 0
-whl input[input_length]           // As long as input has a char at index input_length, increment the index
-    inc input_length
-end
 
-whl input_length                  // Enter block if input length is more than 0
+whl input                         // Enter block if input length is more than 0
   var index 0
   var char input[index]
   var plus "+"
@@ -22,11 +18,9 @@ whl input_length                  // Enter block if input length is more than 0
   var char_equals_plus 1          // Assume that char is a plus sign
   var char_not_equals_plus 0      // and change in next step if incorrect
 
-  whl plus_char_diff
+  con plus_char_diff
       var char_equals_plus 0      // Char was not a plus sign, set char_equals_plus to false
       var char_not_equals_plus 1
-
-      var plus_char_diff 0
   end
 
   inc index                       // Move to next char
@@ -44,20 +38,14 @@ whl input_length                  // Enter block if input length is more than 0
 
   int number
 
-  whl char_equals_plus            // If
+  con char_equals_plus            // If
     inc result number             // Add the number to result
-    var char_equals_plus 0
   end
-  whl char_not_equals_plus        // Else
+  con char_not_equals_plus        // Else
     dec result number             // Subtract the number from result
-    var char_not_equals_plus 0
   end
 
   inp input                       // Get the next line
-  var input_length 0
-  whl input[input_length]
-      inc input_length
-  end
 end
 
 str result
