@@ -1,24 +1,20 @@
 var result 0                      // Initialize result to 0
 
-inp input                         // Get input line and its length
+inp input                         // Get input line
 
-whl input                         // Enter block if input length is more than 0
+whl input                         // Enter block if input is not empty
   var index 0
-  var char input[index]
+  var char input[index]           // Set char to be the first character in input
   var plus "+"
 
-  var char2 char                  // Copy char and plus so that we can play with them
-  var plus_char_diff plus
-
-  whl char2                       // Set copy of plus to be the difference between itself and char
-    dec char2                     // If the difference is 0, then the char is a plus sign
-    dec plus_char_diff
-  end
+  var plus_char_diff plus         // Copy plus
+  dec plus_char_diff char         // and subtract char
+                                  // If difference is 0, then char is a plus sign
 
   var char_equals_plus 1          // Assume that char is a plus sign
   var char_not_equals_plus 0      // and change in next step if incorrect
 
-  con plus_char_diff
+  con plus_char_diff              // If plus_char_diff is not 0, enter block
       var char_equals_plus 0      // Char was not a plus sign, set char_equals_plus to false
       var char_not_equals_plus 1
   end
@@ -28,15 +24,15 @@ whl input                         // Enter block if input length is more than 0
 
   whl char                        // For each remaining char on this line
     var index_minus_one index
-    dec index_minus_one
+    dec index_minus_one           // Index - 1 is needed as a new index in the next step
 
     var number[index_minus_one] char      // Concatenate each char (integer) to a number variable
-
-    inc index
+                                          // Number will (eventually) contain input line without the plus/minus sign
+    inc index                     // Move to next char
     var char input[index]
   end
 
-  int number
+  int number                      // Treat number as an integer
 
   con char_equals_plus            // If
     inc result number             // Add the number to result
@@ -50,6 +46,5 @@ end
 
 str result
 
-out "Result: "
+out "Result: " 0
 out result                        // Print the result
-out 10
