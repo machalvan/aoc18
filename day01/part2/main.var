@@ -1,7 +1,6 @@
-var result 0                      // Initialize result to 0
+var frequency 0                      // Initialize result to 0
 var input_values 0
 var counter 0
-var input_string ""
 
 inp input                         // Get input line
 
@@ -56,24 +55,24 @@ var outer_counter 3
 whl outer_counter
   var counter 0                     // Reset counter
 
-  out "Inputs:"
+  out "Frequency:"
   whl input_values[counter]                         // Enter block if input is not empty
     var input_value input_values[counter]
-    str input_value
-    out input_value
-    int input_value
+    inc frequency input_value             // Add the number to result
 
-    inc result input_value             // Add the number to result
+    str frequency
+    out frequency
+    int frequency
+
     inc counter
   end
 
-  str result
+  str frequency
 
   out "Result: " 0
-  out result                        // Print the result
+  out frequency                        // Print the result
 
-  int result
-
+  int frequency
 
   dec outer_counter
 end
