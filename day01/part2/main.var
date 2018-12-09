@@ -1,6 +1,8 @@
 var frequency 0                      // Initialize result to 0
+var frequency_list 0
 var input_values 0
 var counter 0
+var frequency_list_counter 1
 
 inp input                         // Get input line
 
@@ -55,16 +57,30 @@ var outer_counter 3
 whl outer_counter
   var counter 0                     // Reset counter
 
-  out "Frequency:"
   whl input_values[counter]                         // Enter block if input is not empty
     var input_value input_values[counter]
     inc frequency input_value             // Add the number to result
 
-    str frequency
-    out frequency
-    int frequency
+
+
+    var frequency_list_counter 1
+
+    out ""
+    out "All frequencies:"
+    whl frequency_list[frequency_list_counter]
+      var f frequency_list[frequency_list_counter]
+
+      str f
+      out f
+      int f
+
+      inc frequency_list_counter
+    end
+
+    var frequency_list[frequency_list_counter] frequency
 
     inc counter
+    inc frequency_list_counter
   end
 
   str frequency
