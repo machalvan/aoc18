@@ -51,20 +51,29 @@ whl input
   inp input                       // Get the next line
 end
 
-var counter 0                     // Reset counter
+var outer_counter 3
 
-out "Inputs:"
-whl input_values[counter]                         // Enter block if input is not empty
-  var input_value input_values[counter]
-  str input_value
-  out input_value
-  int input_value
+whl outer_counter
+  var counter 0                     // Reset counter
 
-  inc result input_value             // Add the number to result
-  inc counter
+  out "Inputs:"
+  whl input_values[counter]                         // Enter block if input is not empty
+    var input_value input_values[counter]
+    str input_value
+    out input_value
+    int input_value
+
+    inc result input_value             // Add the number to result
+    inc counter
+  end
+
+  str result
+
+  out "Result: " 0
+  out result                        // Print the result
+
+  int result
+
+
+  dec outer_counter
 end
-
-str result
-
-out "Result: " 0
-out result                        // Print the result
