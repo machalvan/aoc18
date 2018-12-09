@@ -54,6 +54,8 @@ end
 
 var outer_counter 3
 
+out "Frequencies:"
+
 whl outer_counter
   var counter 0                     // Reset counter
 
@@ -65,14 +67,28 @@ whl outer_counter
 
     var frequency_list_counter 1
 
-    out ""
-    out "All frequencies:"
-    whl frequency_list[frequency_list_counter]
-      var f frequency_list[frequency_list_counter]
+    str frequency
+    out frequency
+    int frequency
 
-      str f
-      out f
-      int f
+    whl frequency_list[frequency_list_counter]
+      var element frequency_list[frequency_list_counter]
+
+      var frequency_diff frequency
+      dec frequency_diff element
+
+      var element_equals_frequency 1  // Assume that the element equals this frequency
+
+      con frequency_diff              // If frequency_diff is not 0, enter block
+        var element_equals_frequency 0        // Element was not equal to this frequency, set element_equals_frequency to false
+      end
+
+      con element_equals_frequency
+        out "Found frequency twice: " 0
+        str element
+        out element
+        int element
+      end
 
       inc frequency_list_counter
     end
@@ -85,8 +101,9 @@ whl outer_counter
 
   str frequency
 
-  out "Result: " 0
-  out frequency                        // Print the result
+  //out "Result: " 0
+  //out frequency                        // Print the result
+  //out ""
 
   int frequency
 
