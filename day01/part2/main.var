@@ -1,12 +1,14 @@
-var frequency 0                      // Initialize result to 0
+var frequency 0                           // Initialize variables
 var frequency_list 0
 var input_values 0
 var counter 0
 var frequency_list_counter 1
+var duplicate_frequency_not_found 1
+var first_iteration_over_input_values 1
 
 inp input                         // Get input line
 
-whl input
+whl input                         // As long as input is not empty, enter block
   var index 0
   var char input[index]           // Set char to be the first character in input
   var plus "+"
@@ -19,20 +21,20 @@ whl input
   var char_not_equals_plus 0      // and change in next step if incorrect
 
   con plus_char_diff              // If plus_char_diff is not 0, enter block
-    var char_equals_plus 0      // Char was not a plus sign, set char_equals_plus to false
+    var char_equals_plus 0        // Char was not a plus sign, set char_equals_plus to false
     var char_not_equals_plus 1
   end
 
   inc index                       // Move to next char
   var char input[index]
 
-  whl char                        // For each remaining char on this line
+  whl char                                // For each remaining char on this line
     var index_minus_one index
-    dec index_minus_one           // Index - 1 is needed as a new index in the next step
+    dec index_minus_one                   // Index - 1 is needed as a new index in the next step
 
     var number[index_minus_one] char      // Concatenate each char (integer) to a number variable
                                           // Number will (eventually) contain input line without the plus/minus sign
-    inc index                     // Move to next char
+    inc index                             // Move to next char
     var char input[index]
   end
 
@@ -46,55 +48,34 @@ whl input
     dec input_value number
   end
 
-  var input_values[counter] input_value
+  var input_values[counter] input_value             // Add input value to list
 
   inc counter
   inp input                       // Get the next line
 end
 
-var duplicate_frequency_not_found 1
-var first_iteration_over_input_values 1
-
-out "Frequencies:"
-var initial_frequency frequency_list[0]
-
-str initial_frequency
-out initial_frequency
-int initial_frequency
-
-var frequency_list[0] 0
-
 whl duplicate_frequency_not_found
-  //out "Outer"
-  var counter 0                     // Reset counter
+  var counter 0                   // Reset counter
 
   whl input_values[counter]                         // Enter block if input is not empty
-    //out "Inner"
     var input_value input_values[counter]
-    inc frequency input_value             // Add the number to result
+    inc frequency input_value                       // Add the number to result
 
     var frequency_list_counter 1
-
-    str frequency
-    out frequency
-    int frequency
-
     var element 1
 
     whl element
-      //out "Inner inner"
-      //var frequency_list_element frequency_list[frequency_list_counter]
       var element frequency_list[frequency_list_counter]
       inc frequency_list_counter
 
       var frequency_diff frequency
       dec frequency_diff element
 
-      var element_equals_frequency 1  // Assume that the element equals this frequency
+      var element_equals_frequency 1                // Assume that the element equals this frequency
 
-      con frequency_diff              // If frequency_diff is not 0, enter block
-        var element_equals_frequency 0        // Element was not equal to this frequency, set element_equals_frequency to false
-      end
+      con frequency_diff                            // If frequency_diff is not 0, enter block
+        var element_equals_frequency 0              // Element was not equal to this frequency, set
+      end                                           // element_equals_frequency to false
 
       con element_equals_frequency
         out "Result for part 2: " 0
@@ -102,9 +83,8 @@ whl duplicate_frequency_not_found
         out element
         int element
 
-        var frequency_list 0        // Reset lists to break
-        var input_values 0
-        var element 0
+        var element 0             // Break inner loop
+        var input_values 0        // Break outer loop
 
         var duplicate_frequency_not_found 0
       end
@@ -118,11 +98,12 @@ whl duplicate_frequency_not_found
     inc frequency_list_counter
   end
 
-  con first_iteration_over_input_values
+  con first_iteration_over_input_values       // Print result for part 1 only after first iteration
     str frequency
     out "Result for part 1: " 0
     out frequency
     int frequency
+
     var first_iteration_over_input_values 0
   end
 end
