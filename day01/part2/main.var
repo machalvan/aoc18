@@ -39,11 +39,9 @@ whl input
   var input_value 0
 
   con char_equals_plus            // If
-    inc result number             // Add the number to result
     inc input_value number
   end
   con char_not_equals_plus        // Else
-    dec result number             // Subtract the number from result
     dec input_value number
   end
 
@@ -53,70 +51,17 @@ whl input
   inp input                       // Get the next line
 end
 
-out "Inputs:"
 var counter 0                     // Reset counter
-whl input_values[counter]
+
+out "Inputs:"
+whl input_values[counter]                         // Enter block if input is not empty
   var input_value input_values[counter]
   str input_value
   out input_value
+  int input_value
 
+  inc result input_value             // Add the number to result
   inc counter
-end
-
-
-
-
-
-
-whl input                         // Enter block if input is not empty
-  var index 0
-  var char input[index]           // Set char to be the first character in input
-  var plus "+"
-
-  var plus_char_diff plus         // Copy plus
-  dec plus_char_diff char         // and subtract char
-                                  // If difference is 0, then char is a plus sign
-
-  var char_equals_plus 1          // Assume that char is a plus sign
-  var char_not_equals_plus 0      // and change in next step if incorrect
-
-  con plus_char_diff              // If plus_char_diff is not 0, enter block
-    var char_equals_plus 0      // Char was not a plus sign, set char_equals_plus to false
-    var char_not_equals_plus 1
-  end
-
-  inc index                       // Move to next char
-  var char input[index]
-
-  whl char                        // For each remaining char on this line
-    var index_minus_one index
-    dec index_minus_one           // Index - 1 is needed as a new index in the next step
-
-    var number[index_minus_one] char      // Concatenate each char (integer) to a number variable
-                                          // Number will (eventually) contain input line without the plus/minus sign
-    inc index                     // Move to next char
-    var char input[index]
-  end
-
-  int number                      // Treat number as an integer
-  var signed_input 0
-
-  con char_equals_plus            // If
-    inc result number             // Add the number to result
-    inc signed_input number
-  end
-  con char_not_equals_plus        // Else
-    dec result number             // Subtract the number from result
-    dec signed_input number
-  end
-
-  str signed_input
-
-  var inputs[counter] signed_input
-  out inputs
-
-  inc counter
-  inp input                       // Get the next line
 end
 
 str result
