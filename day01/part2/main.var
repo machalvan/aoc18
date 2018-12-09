@@ -1,5 +1,5 @@
 var result 0                      // Initialize result to 0
-var inputs 0
+var input_values 0
 var counter 0
 var input_string ""
 
@@ -36,31 +36,31 @@ whl input
   end
 
   int number                      // Treat number as an integer
-  var signed_input 0
+  var input_value 0
 
   con char_equals_plus            // If
     inc result number             // Add the number to result
-    inc signed_input number
+    inc input_value number
   end
   con char_not_equals_plus        // Else
     dec result number             // Subtract the number from result
-    dec signed_input number
+    dec input_value number
   end
 
-  var inputs[counter] signed_input
+  var input_values[counter] input_value
 
   inc counter
   inp input                       // Get the next line
 end
 
 out "Inputs:"
-var a 0
-whl inputs[a]
-  var b inputs[a]
-  str b
-  out b
+var counter 0                     // Reset counter
+whl input_values[counter]
+  var input_value input_values[counter]
+  str input_value
+  out input_value
 
-  inc a
+  inc counter
 end
 
 
