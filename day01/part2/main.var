@@ -52,7 +52,8 @@ whl input
   inp input                       // Get the next line
 end
 
-var outer_counter 3
+var duplicate_frequency_not_found 1
+var first_iteration_over_input_values 1
 
 out "Frequencies:"
 var initial_frequency frequency_list[0]
@@ -63,7 +64,7 @@ int initial_frequency
 
 var frequency_list[0] 0
 
-whl outer_counter
+whl duplicate_frequency_not_found
   //out "Outer"
   var counter 0                     // Reset counter
 
@@ -96,7 +97,7 @@ whl outer_counter
       end
 
       con element_equals_frequency
-        out "Found frequency twice: " 0
+        out "Result for part 2: " 0
         str element
         out element
         int element
@@ -105,7 +106,7 @@ whl outer_counter
         var input_values 0
         var element 0
 
-        var outer_counter 1
+        var duplicate_frequency_not_found 0
       end
 
       var element frequency_list[frequency_list_counter]
@@ -117,13 +118,11 @@ whl outer_counter
     inc frequency_list_counter
   end
 
-  str frequency
-
-  //out "Result: " 0
-  //out frequency                        // Print the result
-  //out ""
-
-  int frequency
-
-  dec outer_counter
+  con first_iteration_over_input_values
+    str frequency
+    out "Result for part 1: " 0
+    out frequency
+    int frequency
+    var first_iteration_over_input_values 0
+  end
 end
