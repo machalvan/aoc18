@@ -61,6 +61,8 @@ str initial_frequency
 out initial_frequency
 int initial_frequency
 
+var frequency_list[0] 0
+
 whl outer_counter
   //out "Outer"
   var counter 0                     // Reset counter
@@ -76,8 +78,11 @@ whl outer_counter
     out frequency
     int frequency
 
-    whl frequency_list[frequency_list_counter]
+    var element 1
+
+    whl element
       //out "Inner inner"
+      //var frequency_list_element frequency_list[frequency_list_counter]
       var element frequency_list[frequency_list_counter]
       inc frequency_list_counter
 
@@ -98,10 +103,12 @@ whl outer_counter
 
         var frequency_list 0        // Reset lists to break
         var input_values 0
+        var element 0
 
         var outer_counter 1
       end
 
+      var element frequency_list[frequency_list_counter]
     end
 
     var frequency_list[frequency_list_counter] frequency
