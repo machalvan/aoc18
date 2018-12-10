@@ -1,3 +1,6 @@
+// Solutions to Advent of Code 2018, day 1, part 1 and 2
+// https://adventofcode.com/2018/day/1
+
 var frequency 0                           // Initialize variables
 var frequency_list 0
 var input_values 0
@@ -8,17 +11,19 @@ var first_iteration_over_input_values 1
 
 inp input                         // Get input line
 
+// Iterate over the input and
+// put the values in a list as
+// positive and negative integers.
 whl input                         // As long as input is not empty, enter block
   var index 0
   var char input[index]           // Set char to be the first character in input
   var plus "+"
 
-  var plus_char_diff plus         // Copy plus
-  dec plus_char_diff char         // and subtract char
-                                  // If difference is 0, then char is a plus sign
+  var plus_char_diff plus         // Subtract char from plus,
+  dec plus_char_diff char         // if difference is 0, then char is a plus sign
 
-  var char_equals_plus 1          // Assume that char is a plus sign
-  var char_not_equals_plus 0      // and change in next step if incorrect
+  var char_equals_plus 1          // Assume that char is a plus sign and change in next step if incorrect
+  var char_not_equals_plus 0
 
   con plus_char_diff              // If plus_char_diff is not 0, enter block
     var char_equals_plus 0        // Char was not a plus sign, set char_equals_plus to false
@@ -48,28 +53,32 @@ whl input                         // As long as input is not empty, enter block
     dec input_value number
   end
 
-  var input_values[counter] input_value             // Add input value to list
+  var input_values[counter] input_value   // Add input value to list
 
   inc counter
   inp input                       // Get the next line
 end
 
+// Starting with 0, each added value
+// from the input list gives a new frequency.
+// Iterate over the input list repeatedly
+// until a frequency is found twice.
 whl duplicate_frequency_not_found
   var counter 0                   // Reset counter
 
   whl input_values[counter]                         // Enter block if input is not empty
     var input_value input_values[counter]
-    inc frequency input_value                       // Add the number to result
+    inc frequency input_value                       // Add the number to frequency to get the new frequency
 
-    var frequency_list_counter 1
+    var frequency_list_counter 0
     var element 1
 
-    whl element
-      var element frequency_list[frequency_list_counter]
+    whl element                                     // For element in frequency list, enter loop at least once
       inc frequency_list_counter
+      var element frequency_list[frequency_list_counter]
 
-      var frequency_diff frequency
-      dec frequency_diff element
+      var frequency_diff frequency                  // Subtract element from frequency,
+      dec frequency_diff element                    // if difference is 0, then element is this frequency (again)
 
       var element_equals_frequency 1                // Assume that the element equals this frequency
 
@@ -77,19 +86,17 @@ whl duplicate_frequency_not_found
         var element_equals_frequency 0              // Element was not equal to this frequency, set
       end                                           // element_equals_frequency to false
 
-      con element_equals_frequency
+      con element_equals_frequency                  // Print result for part 2
         out "Result for part 2: " 0
         str element
         out element
         int element
 
-        var element 0             // Break inner loop
-        var input_values 0        // Break outer loop
+        var element 0             // Escape inner loop
+        var input_values 0        // Escape outer loop
 
         var duplicate_frequency_not_found 0
       end
-
-      var element frequency_list[frequency_list_counter]
     end
 
     var frequency_list[frequency_list_counter] frequency
