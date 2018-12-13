@@ -1,13 +1,13 @@
 // Solutions to Advent of Code 2018, day 1, part 1 and 2
 // https://adventofcode.com/2018/day/1
+//
+// Written in VAR
+// https://github.com/machalvan/VAR
+//
+// Approximate running time for large input: 5 min
 
-var frequency 0                           // Initialize variables
-var frequency_list 0
-var input_values 0
+var input_values 0                // Initialize variables
 var counter 0
-var frequency_list_counter 1
-var duplicate_frequency_not_found 1
-var first_iteration_over_input_values 1
 
 inp input                         // Get input line
 
@@ -59,58 +59,61 @@ whl input                         // As long as input is not empty, enter block
   inp input                       // Get the next line
 end
 
+var frequency_zero_value 100000               // To avoid negative index values, frequency 0 is mapped to 100000
+                                              // This means that frequency -1 is mapped to 99999 and so on
+var frequency_list 0
+var frequency_list[frequency_zero_value] 1    // Map frequency 0 (at index 10000) to true because it is found
+
+var part_1_result 0                           // Initialize some more values
+var frequency 0
+var first_iteration_over_input_values 1
+var lap_counter 1
+var duplicate_frequency_not_found 1
+
 // Starting with 0, each added value
 // from the input list gives a new frequency.
 // Iterate over the input list repeatedly
 // until a frequency is found twice.
 whl duplicate_frequency_not_found
-  var counter 0                   // Reset counter
+  var counter 0                             // Reset counter
+  var input_value input_values[counter]
 
-  whl input_values[counter]                         // Enter block if input is not empty
-    var input_value input_values[counter]
-    inc frequency input_value                       // Add the number to frequency to get the new frequency
+  whl input_value                           // Enter loop if input is not empty
+    inc frequency input_value               // Add the number to frequency to get the new frequency
 
-    var frequency_list_counter 0
-    var element 1
+    var frequency_index frequency           // Get the frequency index by adding 100000
+    inc frequency_index frequency_zero_value
 
-    whl element                                     // For element in frequency list, enter loop at least once
-      inc frequency_list_counter
-      var element frequency_list[frequency_list_counter]
+    con frequency_list[frequency_index]     // Check if frequency has been found before
+      out "Result for part 1: " 0           // Print results
+      str part_1_result
+      out part_1_result
 
-      var frequency_diff frequency                  // Subtract element from frequency,
-      dec frequency_diff element                    // if difference is 0, then element is this frequency (again)
+      out "Result for part 2: " 0
+      str frequency
+      out frequency
 
-      var element_equals_frequency 1                // Assume that the element equals this frequency
-
-      con frequency_diff                            // If frequency_diff is not 0, enter block
-        var element_equals_frequency 0              // Element was not equal to this frequency, set
-      end                                           // element_equals_frequency to false
-
-      con element_equals_frequency                  // Print result for part 2
-        out "Result for part 2: " 0
-        str element
-        out element
-        int element
-
-        var element 0             // Escape inner loop
-        var input_values 0        // Escape outer loop
-
-        var duplicate_frequency_not_found 0
-      end
+      var input_values 0                    // Escape inner loop
+      var duplicate_frequency_not_found 0   // Escape outer loop
+      var lap_counter 0                     // Do not print this last lap number
     end
 
-    var frequency_list[frequency_list_counter] frequency
+    var frequency_list[frequency_index] 1   // Map frequency to true, because it has been found
 
     inc counter
-    inc frequency_list_counter
+    var input_value input_values[counter]   // Get next frequency
   end
 
-  con first_iteration_over_input_values       // Print result for part 1 only after first iteration
-    str frequency
-    out "Result for part 1: " 0
-    out frequency
-    int frequency
-
+  con first_iteration_over_input_values     // Print result for part 1 only after first iteration
+    var part_1_result frequency
     var first_iteration_over_input_values 0
+  end
+
+  con lap_counter
+    out "Lap: " 0           // Print lap and start over with the first value in the input list
+    str lap_counter
+    out lap_counter
+    int lap_counter
+    inc lap_counter
   end
 end
