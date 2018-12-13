@@ -62,7 +62,7 @@ end
 var frequency_zero_value 100000               // To avoid negative index values, frequency 0 is mapped to 100000
                                               // This means that frequency -1 is mapped to 99999 and so on
 var frequency_list 0
-var frequency_list[frequency_zero_value] 1    // Map frequency 0 (at index 10000) to true because it is found
+var frequency_list[frequency_zero_value] 1    // Map frequency 0 (at index 100000) to true because it is found
 
 var part_1_result 0                           // Initialize some more values
 var frequency 0
